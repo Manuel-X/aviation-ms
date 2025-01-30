@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-function RiddleQuestion({ question, index }) {
+function RiddleQuestion({ question, index, onAnswer }) {
   const [selectedOption, setSelectedOption] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [fade, setFade] = useState(false);
@@ -9,18 +9,17 @@ function RiddleQuestion({ question, index }) {
 
   const handleClick = (option) => {
     setSelectedOption(option);
-    if (option === question.answer) {
-      setMessage(question.message_right);
-      setIsCorrect(true);
-    } else {
-      setMessage(question.message_wrong);
-      setIsCorrect(false);
-    }
+    const correct = option === question.answer;
+    setIsCorrect(correct);
+    setMessage(correct ? question.message_right : question.message_wrong);
+
+    // Notify parent about the answer (whether it's correct or not)
+    onAnswer(index, correct); // Pass the index and whether the answer is correct
 
     setTimeout(() => {
       setShowModal(true);
       setTimeout(() => setFade(true), 10);
-    }, 1000);
+    }, 400);
   };
 
   const closeModal = () => {
@@ -32,12 +31,13 @@ function RiddleQuestion({ question, index }) {
     <>
       <div
         style={{
+          overflowX: 'hidden',
           marginTop: "20px",
           backgroundColor: "#1E1E1E",
           border: "1px solid #333",
           padding: "20px",
           borderRadius: "15px",
-          width: "80vw",
+          width: "70vw",
           textAlign: "left",
           boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.3)",
           fontFamily: "'Poppins', sans-serif",
