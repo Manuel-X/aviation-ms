@@ -6,7 +6,11 @@
 
 }
 body{
-  background-color: rgb(255, 255, 255);
+  background-image: url('https://img.freepik.com/premium-vector/abstract-seamless-pattern-with-shapes-light-pastel-color-white-background-vector-illustration_259594-374.jpg'); /* Replace with your image URL */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* Keeps the background fixed when scrolling */
 }
 
 .logo {
