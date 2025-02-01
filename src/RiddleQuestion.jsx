@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 function RiddleQuestion({ question, index, onAnswer }) {
   const [selectedOption, setSelectedOption] = useState("");
@@ -6,6 +7,23 @@ function RiddleQuestion({ question, index, onAnswer }) {
   const [fade, setFade] = useState(false);
   const [message, setMessage] = useState("");
   const [isCorrect, setIsCorrect] = useState(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const element = document.getElementById(`question-${index}`);
+      if (element) {
+        const rect = element.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.75) {
+          setIsVisible(true);
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Check visibility on mount
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const handleClick = (option) => {
     setSelectedOption(option);
@@ -14,7 +32,7 @@ function RiddleQuestion({ question, index, onAnswer }) {
     setMessage(correct ? question.message_right : question.message_wrong);
 
     // Notify parent about the answer (whether it's correct or not)
-    onAnswer(index, correct); // Pass the index and whether the answer is correct
+    onAnswer(index, correct);
 
     setTimeout(() => {
       setShowModal(true);
@@ -29,9 +47,14 @@ function RiddleQuestion({ question, index, onAnswer }) {
 
   return (
     <>
-      <div
+      {/* Question with fade-in from right animation */}
+      <motion.div
+        id={`question-${index}`}
+        initial={{ opacity: 0, x: -700 }}
+        animate={isVisible ? { opacity: 1, x: 0 } : {}}
+        transition={{ duration: 0.5, ease: "easeInOut" }}
         style={{
-          overflowX: 'hidden',
+          overflowX: "hidden",
           marginTop: "10px",
           backgroundColor: "#23366A",
           border: "1px solid #333",
@@ -39,8 +62,8 @@ function RiddleQuestion({ question, index, onAnswer }) {
           borderRadius: "15px",
           width: "86vw",
           textAlign: "left",
-          marginLeft:"10px",
-          boxShadow: "0px 4px 15pxrgba(35, 54, 106, 0.3)",
+          marginLeft: "10px",
+          boxShadow: "0px 4px 15px rgba(35, 54, 106, 0.3)",
           fontFamily: "'Poppins', sans-serif",
           transition: "all 0.3s ease-in-out",
           color: "#E0E0E0",
@@ -94,7 +117,7 @@ function RiddleQuestion({ question, index, onAnswer }) {
             </div>
           </div>
         ))}
-      </div>
+      </motion.div>
 
       {/* Modal with Fade Animation */}
       {showModal && (
@@ -146,7 +169,8 @@ function RiddleQuestion({ question, index, onAnswer }) {
                 fontSize: "20px",
                 fontWeight: "bold",
                 color: "#FFFFFF",
-                marginBottom: "15px",
+                marginBottom: "20px",
+                textAlign: "start",
               }}
             >
               {message}

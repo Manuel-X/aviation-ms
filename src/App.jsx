@@ -92,7 +92,7 @@ function App() {
   };
 
   return (
-    <div style={{ textAlign: "center", color: "#E0E0E0", fontFamily: "'Poppins', sans-serif", overflow:'hidden', width:'100vw' }}>
+    <div style={{ textAlign: "center", color: "#E0E0E0", fontFamily: "'Poppins', sans-serif", overflow:'hidden', width:'100vw', marginBottom:20 }}>
       
 
       <img style={{width:"84vw", marginBottom:"40px", marginTop:"20px"}} src="https://is4tsusa.com/wp-content/uploads/2023/12/IS4TS_LOGO_high.png"/>
@@ -102,22 +102,22 @@ function App() {
           <button
             onClick={() => window.open("https://is4tsusa.com/", "_blank")}
             style={{
-              margin: "10px",
-              padding: "15px 30px",
+              margin: "1px",
+              padding: "15px 50px",
               border: "none",
-              background: "linear-gradient(to right, #1505f8, rgb(59, 103, 224)", // Orange to Yellow gradient
+              background: "linear-gradient(to right, #13183F, #3F75B3", // Orange to Yellow gradient
               color: "white",
               fontSize: "18px",
-              fontWeight: "bold",
+              fontWeight: "medium",
               borderRadius: "10px",
               cursor: "pointer",
               transition: "background 0.3s ease-in-out",
               width:'84vw'
             }}
-            onMouseOver={(e) => (e.target.style.background = "linear-gradient(to right, #1505f8, rgb(59, 103, 224)")}
-            onMouseOut={(e) => (e.target.style.background = "linear-gradient(to right, #1505f8, rgb(59, 103, 224)")}
+            onMouseOver={(e) => (e.target.style.background = "linear-gradient(to right, #13183F, #3F75B3")}
+            onMouseOut={(e) => (e.target.style.background = "linear-gradient(to right, #13183F, #3F75B3")}
           >
-            Visit Our Website!
+            Visit Our Website
           </button>
           <button
             onClick={() => setStartGame(true)} // Start the game
@@ -128,16 +128,16 @@ function App() {
               background: "linear-gradient(to right,rgb(19, 165, 63),rgb(81, 233, 89))", // Blue to light cyan gradient
               color: "white",
               fontSize: "18px",
-              fontWeight: "bold",
+              fontWeight: "medium",
               borderRadius: "10px",
               cursor: "pointer",
               transition: "background 0.3s ease-in-out",
                width:'84vw'
             }}
-            onMouseOver={(e) => (e.target.style.background = "linear-gradient(to right, #2768a1, #00B5E2)")}
-            onMouseOut={(e) => (e.target.style.background = "linear-gradient(to right, #3A7BD5, #00D2FF)")}
+            onMouseOver={(e) => (e.target.style.background = "linear-gradient(to right, #089D43, rgb(142,199,65)")}
+            onMouseOut={(e) => (e.target.style.background = "linear-gradient(to right,  #089D43, rgb(142,199,65)")}
           >
-            Enter Giveaway Game!
+            Enter Giveaway Game
           </button>
         </div>
       )}
@@ -155,7 +155,7 @@ function App() {
             transition: "all 0.3s ease-in-out",
           }}
         >
-          <h2 style={{ fontSize: "24px", fontWeight: "bold", color: "#fff" }}>
+          <h2 style={{ fontSize: "24px", fontWeight: "medium", color: "#fff" }}>
             {allCorrect ? "Congratulations on completing the quiz! 🎉" : "Oops! Try Again 😢"}
           </h2>
           <p style={{ fontSize: "18px", marginTop: "10px", color: "#fff" }}>
@@ -175,7 +175,7 @@ function App() {
                 backgroundColor: "#007BFF",
                 color: "white",
                 fontSize: "16px",
-                fontWeight: "bold",
+                fontWeight: "medium",
                 borderRadius: "8px",
                 cursor: "pointer",
                 transition: "background 0.3s ease-in-out",
@@ -206,7 +206,7 @@ function App() {
               onMouseOver={(e) => (e.target.style.background = "linear-gradient(to right, #1505f8, rgb(59, 103, 224)")}
               onMouseOut={(e) => (e.target.style.background = "linear-gradient(to right, #1505f8, rgb(59, 103, 224)")}
             >
-              Visit Our Website!
+              Visit Our Website
             </button>
           )}
         </div>
