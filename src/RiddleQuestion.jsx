@@ -75,7 +75,7 @@ function RiddleQuestion({ question, index, onAnswer }) {
                     : "#E0E0E0",
                 transition: "all 0.3s ease-in-out",
                 cursor: "pointer",
-                textAlign: "center",
+                textAlign: "start",
                 boxShadow: selectedOption
                   ? option === question.answer
                     ? "0px 0px 10px #4CAF50"
@@ -84,8 +84,8 @@ function RiddleQuestion({ question, index, onAnswer }) {
                     : "none"
                   : "none",
                 display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
+                alignItems: "start",
+                justifyContent: "start",
                 fontFamily: "'Poppins', sans-serif",
               }}
             >

@@ -5,34 +5,56 @@ import RiddleQuestion from './RiddleQuestion';
 function App() {
   const initialQuestions = [
     {
-      question: "How many years of government contracting experience does IS4TS bring to its clients?",
-      options: ["3","5", "10", "20"],
-      answer: "20",
-      message_right: "Correct! With two decades of experience, IS4TS is well-versed in government regulations, including FAR, DFARS, DCS, and ITAR compliance.",
-      message_wrong: "Not quite! IS4TS has 20 years of experience in government contracting, ensuring compliance and expertise in handling defense and commercial projects.",
+      question: "What key role does IS4TS play in aviation?",
+      options: [
+        "Providing Spare Parts, Tools, and Repair Management",
+        "Developing Flight Control Systems",
+        "Designing & Engineering Advanced Aerospace Components",
+        "Providing Research & Development for Future Aircraft Technologies"
+      ],
+      answer: "Providing Spare Parts, Tools, and Repair Management",
+      message_right: "You got it! IS4TS supports aviation industries by providing spare parts, specialized tools, and repair management services, ensuring operational efficiency.",
+      message_wrong: " Not quite! IS4TS is a key supplier of essential aviation components, spare parts, tools, and services like repair management, ensuring high reliability and performance across global operations.",
     },
     {
-      question: "How many years of government contracting experience does IS4TS bring to its clients?",
-      options: ["3","5", "10", "20"],
-      answer: "20",
-      message_right: "Correct! With two decades of experience, IS4TS is well-versed in government regulations, including FAR, DFARS, DCS, and ITAR compliance.",
-      message_wrong: "Not quite! IS4TS has 20 years of experience in government contracting, ensuring compliance and expertise in handling defense and commercial projects.",
+      question: "IS4TS has built a strong reputation in government contracting. How long has IS4TS been a trusted partner in this field?",
+      options: ["Over 3 Years","Over 5 Years", "Over 10 Years", "Over 20 Years"],
+      answer: "Over 20 Years",
+      message_right: "Spot on! With over 20 years of experience, IS4TS is a leader in government contracting, ensuring compliance with FAR, DFARS, DCS, and ITAR regulations while delivering top-tier solutions.",
+      message_wrong: "Good try! But IS4TS has over two decades of experience, making it a trusted name in government and defense contracting worldwide.",
     },
     {
-      question: "How many years of government contracting experience does IS4TS bring to its clients?",
-      options: ["3","5", "10", "20"],
-      answer: "20",
-      message_right: "Correct! With two decades of experience, IS4TS is well-versed in government regulations, including FAR, DFARS, DCS, and ITAR compliance.",
-      message_wrong: "Not quite! IS4TS has 20 years of experience in government contracting, ensuring compliance and expertise in handling defense and commercial projects.",
+      question:"Which major companies trust IS4TS for their critical needs?",
+      options:[
+          "Boeing, Raytheon, and Honeywell",
+          "General Electric, Pratt & Whitney, and Rolls-Royce",
+          "Lockheed Martin, Northrop Grumman, and Airbus Defense",
+          "BAE Systems, L3Harris, and General Dynamics"
+      ],
+      answer:"Lockheed Martin, Northrop Grumman, and Airbus Defense",
+      message_right:"That’s right! IS4TS has partnered with global industry leaders like Lockheed Martin, Northrop Grumman, and Airbus Defense, delivering high-quality tools, equipment, and spare parts.",
+      message_wrong:"Nice guess! IS4TS works with top aerospace and defense companies like Lockheed Martin, Northrop Grumman, and Airbus Defense, ensuring they receive reliable equipment, spare parts, and technical support for mission-critical operations."
     },
     {
-      question: "How many years of government contracting experience does IS4TS bring to its clients?",
-      options: ["3","5", "10", "20"],
-      answer: "20",
-      message_right: "Correct! With two decades of experience, IS4TS is well-versed in government regulations, including FAR, DFARS, DCS, and ITAR compliance.",
-      message_wrong: "Not quite! IS4TS has 20 years of experience in government contracting, ensuring compliance and expertise in handling defense and commercial projects.",
+      question:"How does IS4TS support global military operations?",
+      options:[
+          "Developing Defense Training Video Games",
+          "Manufacturing Military Uniforms",
+          "Supplying Mission-Critical Equipment, Spare Parts, and Tools",
+          "Operating Military Recruitment Centers"
+      ],
+      answer:"Supplying Mission-Critical Equipment, Spare Parts, and Tools",
+      message_right:"Perfect! IS4TS provides high-quality tools, spare parts, and mission-critical equipment, supporting global military and defense operations.",
+      message_wrong:"Not the one! IS4TS is a trusted supplier for defense organizations, ensuring they receive top-tier spare parts, equipment, and technical support."
     },
-    // (repeat the same structure for other questions)
+
+    {
+      question: "What truly sets IS4TS apart as a government contractor?",
+      options: ["8(a) SBA Certification & Extensive Government Experience", "Military Equipment Manufacturing Capabilities","Research & Development Expertise", "Strategic Global Defense Alliances"],
+      answer: "8(a) SBA Certification & Extensive Government Experience",
+      message_right: "Nailed it! IS4TS is 8(a) SBA Certified, highlighting its commitment to excellence, government compliance, and small business growth in highly regulated industries.",
+      message_wrong: "Great try, but not quite the right one. IS4TS’s certifications, especially the 8(a), ensure that it remains a trusted partner for aerospace and defense contracting worldwide.",
+    },
   ];
 
   // Load stored data or set default
@@ -52,7 +74,10 @@ function App() {
     if (Object.keys(updatedAnswers).length === initialQuestions.length) {
       const allRight = Object.values(updatedAnswers).every((correct) => correct);
       setAllCorrect(allRight);
-      setShowResult(true);
+      setTimeout(()=>{
+        setShowResult(true);
+      },2000)
+      
       localStorage.setItem('answers', JSON.stringify(updatedAnswers));
       localStorage.setItem('completed', JSON.stringify(allRight));
     }
@@ -131,11 +156,11 @@ function App() {
           }}
         >
           <h2 style={{ fontSize: "24px", fontWeight: "bold", color: "#fff" }}>
-            {allCorrect ? "Congratulations! 🎉" : "Oops! Try Again 😢"}
+            {allCorrect ? "Congratulations on completing the quiz! 🎉" : "Oops! Try Again 😢"}
           </h2>
           <p style={{ fontSize: "18px", marginTop: "10px", color: "#fff" }}>
             {allCorrect
-              ? "Go back to the booth for your giveaway and show this screen!"
+              ? "To enter our raffle for the giveaway, head over to our booth and show us this screen confirming you've finished. We can't wait to see you!"
               : "Not all answers were correct. Give it another shot!"}
           </p>
 
