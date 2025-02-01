@@ -76,7 +76,7 @@ function App() {
       setAllCorrect(allRight);
       setTimeout(()=>{
         setShowResult(true);
-      },2000)
+      },5000)
       
       localStorage.setItem('answers', JSON.stringify(updatedAnswers));
       localStorage.setItem('completed', JSON.stringify(allRight));

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 
-function RiddleQuestion({ question, index, onAnswer }) {
+function RiddleQuestion({ question, index, onAnswer, totalQuestions, onQuizEnd }) {
   const [selectedOption, setSelectedOption] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [fade, setFade] = useState(false);
@@ -38,19 +38,24 @@ function RiddleQuestion({ question, index, onAnswer }) {
       setShowModal(true);
       setTimeout(() => setFade(true), 10);
     }, 400);
-
-    // Auto-scroll to next question
-    setTimeout(() => {
-      const nextQuestion = document.getElementById(`question-${index + 1}`);
-      if (nextQuestion) {
-        nextQuestion.scrollIntoView({ behavior: "smooth", block: "center" });
-      }
-    }, 2000);
   };
 
   const closeModal = () => {
     setFade(false);
-    setTimeout(() => setShowModal(false), 300);
+    setTimeout(() => {
+      setShowModal(false);
+
+      if (index === totalQuestions - 1) {
+        // If it's the last question, end the game
+        onQuizEnd();
+      } else {
+        // Auto-scroll to next question
+        const nextQuestion = document.getElementById(`question-${index + 1}`);
+        if (nextQuestion) {
+          nextQuestion.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+      }
+    }, 300);
   };
 
   return (
