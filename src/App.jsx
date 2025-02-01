@@ -92,10 +92,10 @@ function App() {
   };
 
   return (
-    <div style={{ textAlign: "center", padding: "10px", color: "#E0E0E0", fontFamily: "'Poppins', sans-serif", overflow:'hidden', width:'80vw' }}>
+    <div style={{ textAlign: "center", color: "#E0E0E0", fontFamily: "'Poppins', sans-serif", overflow:'hidden', width:'100vw' }}>
       
 
-      <img style={{width:"80vw", marginBottom:"100px"}} src="https://is4tsusa.com/wp-content/uploads/2023/12/IS4TS_LOGO_high.png"/>
+      <img style={{width:"84vw", marginBottom:"40px", marginTop:"20px"}} src="https://is4tsusa.com/wp-content/uploads/2023/12/IS4TS_LOGO_high.png"/>
       {/* Show buttons only if the game has not started */}
       {!startGame && !showResult && (
         <div style={{ marginBottom: "20px" }}>
@@ -112,7 +112,7 @@ function App() {
               borderRadius: "10px",
               cursor: "pointer",
               transition: "background 0.3s ease-in-out",
-              width:'80vw'
+              width:'84vw'
             }}
             onMouseOver={(e) => (e.target.style.background = "linear-gradient(to right, #1505f8, rgb(59, 103, 224)")}
             onMouseOut={(e) => (e.target.style.background = "linear-gradient(to right, #1505f8, rgb(59, 103, 224)")}
@@ -132,7 +132,7 @@ function App() {
               borderRadius: "10px",
               cursor: "pointer",
               transition: "background 0.3s ease-in-out",
-               width:'80vw'
+               width:'84vw'
             }}
             onMouseOver={(e) => (e.target.style.background = "linear-gradient(to right, #2768a1, #00B5E2)")}
             onMouseOut={(e) => (e.target.style.background = "linear-gradient(to right, #3A7BD5, #00D2FF)")}
@@ -214,7 +214,7 @@ function App() {
 
         <>
 
-        <div style={{color:"gray", fontSize:24, textAlign:"start"}}>Answer all these questions right for a chance to get a valuable giveaway!</div>
+        <div style={{color:"gray", fontSize:22, textAlign:"start", marginLeft:"20px"}}>Answer all these questions right for a chance to get a valuable giveaway!</div>
         {initialQuestions.map((question, index) => (
           <>
           <RiddleQuestion

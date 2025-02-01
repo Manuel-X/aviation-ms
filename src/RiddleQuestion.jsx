@@ -32,20 +32,21 @@ function RiddleQuestion({ question, index, onAnswer }) {
       <div
         style={{
           overflowX: 'hidden',
-          marginTop: "20px",
-          backgroundColor: "#1E1E1E",
+          marginTop: "10px",
+          backgroundColor: "#23366A",
           border: "1px solid #333",
           padding: "20px",
           borderRadius: "15px",
-          width: "70vw",
+          width: "86vw",
           textAlign: "left",
-          boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.3)",
+          marginLeft:"10px",
+          boxShadow: "0px 4px 15pxrgba(35, 54, 106, 0.3)",
           fontFamily: "'Poppins', sans-serif",
           transition: "all 0.3s ease-in-out",
           color: "#E0E0E0",
         }}
       >
-        <h3 style={{ fontSize: 24, color: "#FFFFFF", marginBottom: "15px" }}>
+        <h3 style={{ fontSize: 20, color: "#FFFFFF", marginBottom: "15px" }}>
           Q{index + 1} - {question.question}
         </h3>
 
@@ -54,10 +55,10 @@ function RiddleQuestion({ question, index, onAnswer }) {
             <div
               onClick={() => handleClick(option)}
               style={{
-                border: "2px solid #444",
+                border: "2px solid transparent",
                 borderRadius: "12px",
                 padding: "12px 5px",
-                fontSize: "18px",
+                fontSize: "12px",
                 fontWeight: "500",
                 margin: "8px",
                 width: "100%",
@@ -67,8 +68,8 @@ function RiddleQuestion({ question, index, onAnswer }) {
                     ? "#4CAF50"
                     : selectedOption === option
                     ? "#E63946"
-                    : "#333"
-                  : "#333",
+                    : "#6782B2"
+                  : "#6782B2",
                 color:
                   selectedOption && (option === question.answer || selectedOption === option)
                     ? "white"
