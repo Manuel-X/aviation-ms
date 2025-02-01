@@ -5,6 +5,8 @@
   text-align: center;
 
 }
+
+
 body{
   background-image: url('./assets/bg-2.jpg'); /* Replace with your image URL */
   background-size: cover;
@@ -47,4 +49,16 @@ body{
 
 .read-the-docs {
   color: #888;
+}
+
+
+@keyframes scaleUp {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }

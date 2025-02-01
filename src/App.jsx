@@ -69,19 +69,21 @@ function App() {
   const handleAnswer = (index, isCorrect) => {
     const updatedAnswers = { ...answers, [index]: isCorrect };
     setAnswers(updatedAnswers);
-
-    // Check if all answers are completed
-    if (Object.keys(updatedAnswers).length === initialQuestions.length) {
-      const allRight = Object.values(updatedAnswers).every((correct) => correct);
-      setAllCorrect(allRight);
-      setTimeout(()=>{
-        setShowResult(true);
-      },5000)
-      
-      localStorage.setItem('answers', JSON.stringify(updatedAnswers));
-      localStorage.setItem('completed', JSON.stringify(allRight));
-    }
   };
+
+  const endGame = () => {
+    const allRight = Object.values(answers).every((correct) => correct);
+    setAllCorrect(allRight);
+    setTimeout(()=>{
+      setShowResult(true);
+    },500)
+  
+
+    localStorage.setItem('answers', JSON.stringify(answers));
+    localStorage.setItem('completed', JSON.stringify(allRight));
+  };
+
+
 
   const restartQuiz = () => {
     setAnswers({});
@@ -112,6 +114,7 @@ function App() {
               borderRadius: "10px",
               cursor: "pointer",
               transition: "background 0.3s ease-in-out",
+              animation: "scaleUp 0.4 ease-in-out",
               width:'84vw'
             }}
             onMouseOver={(e) => (e.target.style.background = "linear-gradient(to right, #13183F, #3F75B3")}
@@ -132,7 +135,8 @@ function App() {
               borderRadius: "10px",
               cursor: "pointer",
               transition: "background 0.3s ease-in-out",
-               width:'84vw'
+               width:'84vw',
+               animation: "scaleUp 0.4 ease-in-out",
             }}
             onMouseOver={(e) => (e.target.style.background = "linear-gradient(to right, #089D43, rgb(142,199,65)")}
             onMouseOut={(e) => (e.target.style.background = "linear-gradient(to right,  #089D43, rgb(142,199,65)")}
@@ -152,7 +156,8 @@ function App() {
             boxShadow: "0px 5px 20px rgba(0, 0, 0, 0.3)",
             width: "80%",
             margin: "auto",
-            transition: "all 0.3s ease-in-out",
+            animation: "scaleUp 1.2 ease-in-out",
+
           }}
         >
           <h2 style={{ fontSize: "24px", fontWeight: "medium", color: "#fff" }}>
@@ -172,7 +177,7 @@ function App() {
                 marginTop: "15px",
                 padding: "12px 20px",
                 border: "none",
-                backgroundColor: "#007BFF",
+                backgroundColor: "green",
                 color: "white",
                 fontSize: "16px",
                 fontWeight: "medium",
@@ -202,6 +207,7 @@ function App() {
                 borderRadius: "8px",
                 cursor: "pointer",
                 transition: "background 0.3s ease-in-out",
+                animation: "scaleUp 0.4 ease-in-out",
               }}
               onMouseOver={(e) => (e.target.style.background = "linear-gradient(to right, #1505f8, rgb(59, 103, 224)")}
               onMouseOut={(e) => (e.target.style.background = "linear-gradient(to right, #1505f8, rgb(59, 103, 224)")}
@@ -222,6 +228,8 @@ function App() {
             index={index}
             question={question}
             onAnswer={handleAnswer}
+            onQuizEnd = {endGame}
+            totalQuestions={initialQuestions.length}
           />
           </>
         ))}

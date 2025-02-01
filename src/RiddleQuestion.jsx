@@ -34,6 +34,8 @@ function RiddleQuestion({ question, index, onAnswer, totalQuestions, onQuizEnd }
     // Notify parent about the answer
     onAnswer(index, correct);
 
+
+
     setTimeout(() => {
       setShowModal(true);
       setTimeout(() => setFade(true), 10);
@@ -167,13 +169,15 @@ function RiddleQuestion({ question, index, onAnswer, totalQuestions, onQuizEnd }
           >
             {/* Animated Icon */}
             <div
-              style={{
-                fontSize: "60px",
-                fontWeight: "bold",
-                marginBottom: "15px",
-                color: "#fff",
-                animation: "scaleUp 0.4s ease-in-out",
-              }}
+            style={{
+    fontSize: "60px",
+    fontWeight: "bold",
+    marginBottom: "15px",
+    color: "#fff",
+    animation: "scaleUp 0.4s ease-in-out",
+    animationDelay: "0.4s", // Add a delay of 0.3 seconds
+    animationFillMode: "both", // Ensures it holds the final state after animation
+  }}
             >
               {isCorrect ? "✔" : "✖"}
             </div>
@@ -185,6 +189,9 @@ function RiddleQuestion({ question, index, onAnswer, totalQuestions, onQuizEnd }
                 color: "#FFFFFF",
                 marginBottom: "20px",
                 textAlign: "start",
+                animation: "scaleUp 0.6s ease-in-out",
+    animationDelay: "0.4s", // Add a delay of 0.3 seconds
+    animationFillMode: "both", // Ensures it holds the final state after animation
               }}
             >
               {message}
@@ -204,6 +211,9 @@ function RiddleQuestion({ question, index, onAnswer, totalQuestions, onQuizEnd }
                 cursor: "pointer",
                 transition: "background 0.3s ease-in-out",
                 boxShadow: "0px 3px 10px rgba(255, 255, 255, 0.2)",
+                animation: "scaleUp 1.2s ease-in-out",
+    animationDelay: "0.4s", // Add a delay of 0.3 seconds
+    animationFillMode: "both", // Ensures it holds the final state after animation
               }}
               onMouseOver={(e) =>
                 (e.target.style.backgroundColor = isCorrect ? "#2E7D32" : "#B71C1C")
