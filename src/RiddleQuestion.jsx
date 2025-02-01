@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 
 function RiddleQuestion({ question, index, onAnswer }) {
@@ -8,12 +8,12 @@ function RiddleQuestion({ question, index, onAnswer }) {
   const [message, setMessage] = useState("");
   const [isCorrect, setIsCorrect] = useState(null);
   const [isVisible, setIsVisible] = useState(false);
+  const questionRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      const element = document.getElementById(`question-${index}`);
-      if (element) {
-        const rect = element.getBoundingClientRect();
+      if (questionRef.current) {
+        const rect = questionRef.current.getBoundingClientRect();
         if (rect.top < window.innerHeight * 0.75) {
           setIsVisible(true);
         }
@@ -31,13 +31,21 @@ function RiddleQuestion({ question, index, onAnswer }) {
     setIsCorrect(correct);
     setMessage(correct ? question.message_right : question.message_wrong);
 
-    // Notify parent about the answer (whether it's correct or not)
+    // Notify parent about the answer
     onAnswer(index, correct);
 
     setTimeout(() => {
       setShowModal(true);
       setTimeout(() => setFade(true), 10);
     }, 400);
+
+    // Auto-scroll to next question
+    setTimeout(() => {
+      const nextQuestion = document.getElementById(`question-${index + 1}`);
+      if (nextQuestion) {
+        nextQuestion.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    }, 2000);
   };
 
   const closeModal = () => {
@@ -47,8 +55,9 @@ function RiddleQuestion({ question, index, onAnswer }) {
 
   return (
     <>
-      {/* Question with fade-in from right animation */}
+      {/* Question with fade-in from left animation */}
       <motion.div
+        ref={questionRef}
         id={`question-${index}`}
         initial={{ opacity: 0, x: -700 }}
         animate={isVisible ? { opacity: 1, x: 0 } : {}}
