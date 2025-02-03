@@ -160,12 +160,25 @@ function App() {
 
           }}
         >
-          <h2 style={{ fontSize: "24px", fontWeight: "medium", color: "#fff" }}>
+          <h2 style={{ fontSize: "30px", fontWeight: "medium", color: "#fff", textAlign:"start" }}>
             {allCorrect ? "Congratulations on completing the quiz! 🎉" : "Oops! Try Again 😢"}
           </h2>
-          <p style={{ fontSize: "18px", marginTop: "10px", color: "#fff" }}>
+          <p style={{ fontSize: "18px", marginTop: "10px", color: "#fff", textAlign:"start", lineHeight:2 }}>
             {allCorrect
-              ? "To enter our raffle for the giveaway, head over to our booth and show us this screen confirming you've finished. We can't wait to see you!"
+              ? 
+              <>
+              <div>
+              To enter our raffle for the giveaway, head over to our booth and show us this screen confirming you've finished.
+              </div>
+
+              <div style={{marginTop:20}}>
+              Join us for the raffle drawing at 2:30 pm! 
+              </div>
+
+              <div style={{marginTop:20}}>
+              Can't wait to see you!
+              </div>
+              </>
               : "Not all answers were correct. Give it another shot!"}
           </p>
 
@@ -192,29 +205,7 @@ function App() {
             </button>
           )}
 
-          {/* Show Visit Website button after all questions are answered */}
-          {allCorrect && (
-            <button
-              onClick={() => window.open("https://is4tsusa.com/", "_blank")}
-              style={{
-                marginTop: "15px",
-                padding: "12px 20px",
-                border: "none",
-                background: "linear-gradient(to right, #1505f8, rgb(59, 103, 224)", // Orange to Yellow gradient
-                color: "white",
-                fontSize: "16px",
-                fontWeight: "bold",
-                borderRadius: "8px",
-                cursor: "pointer",
-                transition: "background 0.3s ease-in-out",
-                animation: "scaleUp 0.4 ease-in-out",
-              }}
-              onMouseOver={(e) => (e.target.style.background = "linear-gradient(to right, #1505f8, rgb(59, 103, 224)")}
-              onMouseOut={(e) => (e.target.style.background = "linear-gradient(to right, #1505f8, rgb(59, 103, 224)")}
-            >
-              Visit Our Website
-            </button>
-          )}
+   
         </div>
       ) :  startGame? (
 
