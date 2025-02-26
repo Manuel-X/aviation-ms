@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import './App.css';
 import RiddleQuestion from './RiddleQuestion';
 
+import logo from "./assets/logo.webp"; // Adjust path as needed
+
 function App() {
 
   const now = new Date();
@@ -105,7 +107,7 @@ function App() {
     <div style={{ textAlign: "center", color: "#E0E0E0", fontFamily: "'Poppins', sans-serif", overflow:'hidden', width:'100vw', marginBottom:20 }}>
       
 
-      <img style={{width:"84vw", marginBottom:"40px", marginTop:"20px"}} src="https://is4tsusa.com/wp-content/uploads/2023/12/IS4TS_LOGO_high.png"/>
+      <img style={{width:"84vw", marginBottom:"40px", marginTop:"20px"}} src={logo}/>
       {/* Show buttons only if the game has not started */}
       {!startGame && !showResult && (
         <div style={{ marginBottom: "20px" }}>
