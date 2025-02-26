@@ -3,6 +3,14 @@ import './App.css';
 import RiddleQuestion from './RiddleQuestion';
 
 function App() {
+
+  const now = new Date();
+  const isFriday = now.getDay() === 5; // 5 represents Friday in JS Date API
+
+  // Set time based on the day
+  const raffleTime = isFriday ? "12:00 PM" : "3:00 PM";
+
+  
   const initialQuestions = [
     {
       question: "What key role does IS4TS play in aviation?",
@@ -171,8 +179,8 @@ function App() {
               To enter our raffle for the giveaway, head over to our booth and show us this screen confirming you've finished.
               </div>
 
-              <div style={{marginTop:20}}>
-              Join us for the raffle drawing at 2:30 pm! 
+              <div style={{ marginTop: 20 }}>
+                Join us for the raffle drawing at {raffleTime}!
               </div>
 
               <div style={{marginTop:20}}>
