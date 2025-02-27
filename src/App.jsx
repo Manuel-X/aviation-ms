@@ -3,8 +3,19 @@ import './App.css';
 import RiddleQuestion from './RiddleQuestion';
 
 import logo from "./assets/logo.webp"; // Adjust path as needed
-
+import { motion } from "framer-motion";
 function App() {
+  const [loading, setLoading] = useState(true); // State to manage loader visibility
+
+  // Simulate a 2-second delay to show the loader
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false); // Hide loader after 2 seconds
+    }, 2000);
+
+    // Cleanup timer on component unmount
+    return () => clearTimeout(timer);
+  }, []);
 
   const now = new Date();
   const isFriday = now.getDay() === 5; // 5 represents Friday in JS Date API
@@ -12,7 +23,6 @@ function App() {
   // Set time based on the day
   const raffleTime = isFriday ? "12:00 PM" : "3:00 PM";
 
-  
   const initialQuestions = [
     {
       question: "What key role does IS4TS play in aviation?",
@@ -93,8 +103,6 @@ function App() {
     localStorage.setItem('completed', JSON.stringify(allRight));
   };
 
-
-
   const restartQuiz = () => {
     setAnswers({});
     setShowResult(false);
@@ -104,143 +112,164 @@ function App() {
   };
 
   return (
-    <div style={{ textAlign: "center", color: "#E0E0E0", fontFamily: "'Poppins', sans-serif", overflow:'hidden', width:'100vw', marginBottom:20 }}>
-      
-
-      <img style={{width:"84vw", marginBottom:"40px", marginTop:"20px"}} src={logo}/>
-      {/* Show buttons only if the game has not started */}
-      {!startGame && !showResult && (
-        <div style={{ marginBottom: "20px" }}>
-          <button
-            onClick={() => window.open("https://is4tsusa.com/", "_blank")}
-            style={{
-              margin: "1px",
-              padding: "15px 50px",
-              border: "none",
-              background: "linear-gradient(to right, #13183F, #3F75B3", // Orange to Yellow gradient
-              color: "white",
-              fontSize: "18px",
-              fontWeight: "medium",
-              borderRadius: "10px",
-              cursor: "pointer",
-              transition: "background 0.3s ease-in-out",
-              animation: "scaleUp 0.4 ease-in-out",
-              width:'84vw'
-            }}
-            onMouseOver={(e) => (e.target.style.background = "linear-gradient(to right, #13183F, #3F75B3")}
-            onMouseOut={(e) => (e.target.style.background = "linear-gradient(to right, #13183F, #3F75B3")}
-          >
-            Visit Our Website
-          </button>
-          <button
-            onClick={() => setStartGame(true)} // Start the game
-            style={{
-              margin: "10px",
-              padding: "15px 30px",
-              border: "none",
-              background: "linear-gradient(to right,rgb(19, 165, 63),rgb(81, 233, 89))", // Blue to light cyan gradient
-              color: "white",
-              fontSize: "18px",
-              fontWeight: "medium",
-              borderRadius: "10px",
-              cursor: "pointer",
-              transition: "background 0.3s ease-in-out",
-               width:'84vw',
-               animation: "scaleUp 0.4 ease-in-out",
-            }}
-            onMouseOver={(e) => (e.target.style.background = "linear-gradient(to right, #089D43, rgb(142,199,65)")}
-            onMouseOut={(e) => (e.target.style.background = "linear-gradient(to right,  #089D43, rgb(142,199,65)")}
-          >
-            Enter Giveaway Game
-          </button>
+<>
+    {loading ?
+      ( 
+        <div style={{width:'100vw', height:'100vh', backgroundColor:'white'}}>
+          <div  className="spinner"></div>
         </div>
-      )}
-
-      {/* Show questions or results */}
-      {showResult ? (
-        <div
-          style={{
-            backgroundColor: allCorrect ? "#2E7D32" : "#D32F2F",
-            padding: "30px",
-            borderRadius: "15px",
-            boxShadow: "0px 5px 20px rgba(0, 0, 0, 0.3)",
-            width: "80%",
-            margin: "auto",
-            animation: "scaleUp 1.2 ease-in-out",
-
-          }}
-        >
-          <h2 style={{ fontSize: "30px", fontWeight: "medium", color: "#fff", textAlign:"start" }}>
-            {allCorrect ? "Congratulations on completing the quiz! 🎉" : "Oops! Try Again 😢"}
-          </h2>
-          <p style={{ fontSize: "18px", marginTop: "10px", color: "#fff", textAlign:"start", lineHeight:2 }}>
-            {allCorrect
-              ? 
-              <>
-              <div>
-              To enter our raffle for the giveaway, head over to our booth and show us this screen confirming you've finished.
-              </div>
-
-              <div style={{ marginTop: 20 }}>
-                Join us for the raffle drawing at {raffleTime}!
-              </div>
-
-              <div style={{marginTop:20}}>
-              Can't wait to see you!
-              </div>
-              </>
-              : "Not all answers were correct. Give it another shot!"}
-          </p>
-
-          {/* Show Retry button only if not all answers are correct */}
-          {!allCorrect && (
-            <button
-              onClick={restartQuiz}
-              style={{
-                marginTop: "15px",
-                padding: "12px 20px",
-                border: "none",
-                backgroundColor: "green",
-                color: "white",
-                fontSize: "16px",
-                fontWeight: "medium",
-                borderRadius: "8px",
-                cursor: "pointer",
-                transition: "background 0.3s ease-in-out",
-              }}
-              onMouseOver={(e) => (e.target.style.backgroundColor = "#0056b3")}
-              onMouseOut={(e) => (e.target.style.backgroundColor = "#007BFF")}
-            >
-              Retry
-            </button>
-          )}
-
-   
-        </div>
-      ) :  startGame? (
-
-        <>
-
-        <div style={{color:"gray", fontSize:22, textAlign:"start", marginLeft:"20px"}}>Answer all these questions right for a chance to get a valuable giveaway!</div>
-        {initialQuestions.map((question, index) => (
-          <>
-          <RiddleQuestion
-            key={index}
-            index={index}
-            question={question}
-            onAnswer={handleAnswer}
-            onQuizEnd = {endGame}
-            totalQuestions={initialQuestions.length}
-          />
-          </>
-        ))}
-        </>
       )
       :
-      <></>
-      }
-    </div>
-  );
-}
+      (
+
+        <motion.div         
+        initial={{ opacity: 0, x: -700 }}
+        animate={!loading ? { opacity: 1, x: 0 } : {}}
+        transition={{ duration: 0.5, ease: "easeInOut" }}
+        >
+
+   
+        <div style={{ textAlign: "center", color: "#E0E0E0", fontFamily: "'Poppins', sans-serif", overflow:'hidden', width:'100vw', marginBottom:20 }}>
+      
+
+        <>
+          <img style={{width:"84vw", marginBottom:"40px", marginTop:"20px"}} src={logo} />
+          
+          {/* Show buttons only if the game has not started */}
+          {!startGame && !showResult && (
+            <div style={{ marginBottom: "20px" }}>
+              <button
+                onClick={() => window.open("https://is4tsusa.com/", "_blank")}
+                style={{
+                  margin: "1px",
+                  padding: "15px 50px",
+                  border: "none",
+                  background: "linear-gradient(to right, #13183F, #3F75B3", // Orange to Yellow gradient
+                  color: "white",
+                  fontSize: "18px",
+                  fontWeight: "medium",
+                  borderRadius: "10px",
+                  cursor: "pointer",
+                  transition: "background 0.3s ease-in-out",
+                  animation: "scaleUp 0.4 ease-in-out",
+                  width:'84vw'
+                }}
+                onMouseOver={(e) => (e.target.style.background = "linear-gradient(to right, #13183F, #3F75B3")}
+                onMouseOut={(e) => (e.target.style.background = "linear-gradient(to right, #13183F, #3F75B3")}
+              >
+                Visit Our Website
+              </button>
+              <button
+                onClick={() => setStartGame(true)} // Start the game
+                style={{
+                  margin: "10px",
+                  padding: "15px 30px",
+                  border: "none",
+                  background: "linear-gradient(to right,rgb(19, 165, 63),rgb(81, 233, 89))", // Blue to light cyan gradient
+                  color: "white",
+                  fontSize: "18px",
+                  fontWeight: "medium",
+                  borderRadius: "10px",
+                  cursor: "pointer",
+                  transition: "background 0.3s ease-in-out",
+                   width:'84vw',
+                   animation: "scaleUp 0.4 ease-in-out",
+                }}
+                onMouseOver={(e) => (e.target.style.background = "linear-gradient(to right, #089D43, rgb(142,199,65)")}
+                onMouseOut={(e) => (e.target.style.background = "linear-gradient(to right,  #089D43, rgb(142,199,65)")}
+              >
+                Enter Giveaway Game
+              </button>
+            </div>
+          )}
+
+          {/* Show questions or results */}
+          {showResult ? (
+            <div
+              style={{
+                backgroundColor: allCorrect ? "#2E7D32" : "#D32F2F",
+                padding: "30px",
+                borderRadius: "15px",
+                boxShadow: "0px 5px 20px rgba(0, 0, 0, 0.3)",
+                width: "80%",
+                margin: "auto",
+                animation: "scaleUp 1.2 ease-in-out",
+              }}
+            >
+              <h2 style={{ fontSize: "30px", fontWeight: "medium", color: "#fff", textAlign:"start" }}>
+                {allCorrect ? "Congratulations on completing the quiz! 🎉" : "Oops! Try Again 😢"}
+              </h2>
+              <p style={{ fontSize: "18px", marginTop: "10px", color: "#fff", textAlign:"start", lineHeight:2 }}>
+                {allCorrect
+                  ? 
+                  <>
+                  <div>
+                  To enter our raffle for the giveaway, head over to our booth and show us this screen confirming you've finished.
+                  </div>
+
+                  <div style={{ marginTop: 20 }}>
+                    Join us for the raffle drawing at {raffleTime} for the chance to win a free IS4TS speaker!
+                  </div>
+
+                  <div style={{marginTop:20}}>
+                  We look forward to seeing you at our booth!
+                  </div>
+                  </>
+                  : "Not all answers were correct. Give it another shot!"}
+              </p>
+
+              {/* Show Retry button only if not all answers are correct */}
+              {!allCorrect && (
+                <button
+                  onClick={restartQuiz}
+                  style={{
+                    marginTop: "15px",
+                    padding: "12px 20px",
+                    border: "none",
+                    backgroundColor: "green",
+                    color: "white",
+                    fontSize: "16px",
+                    fontWeight: "medium",
+                    borderRadius: "8px",
+                    cursor: "pointer",
+                    transition: "background 0.3s ease-in-out",
+                  }}
+                  onMouseOver={(e) => (e.target.style.backgroundColor = "#0056b3")}
+                  onMouseOut={(e) => (e.target.style.backgroundColor = "#007BFF")}
+                >
+                  Retry
+                </button>
+              )}
+            </div>
+          ) : startGame ? (
+            <>
+              <div style={{color:"gray", fontSize:22, textAlign:"start", marginLeft:"20px"}}>Answer all these questions right for a chance to get a valuable giveaway!</div>
+              {initialQuestions.map((question, index) => (
+                <RiddleQuestion
+                  key={index}
+                  index={index}
+                  question={question}
+                  onAnswer={handleAnswer}
+                  onQuizEnd={endGame}
+                  totalQuestions={initialQuestions.length}
+                />
+              ))}
+            </>
+          ) : (
+            <></>
+          )}
+        </>
+      
+      </div>
+      </motion.div>
+      )
+    }
+</>
+  )
+};
+
+  
+  
+
 
 export default App;
